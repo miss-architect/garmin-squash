@@ -1,0 +1,6 @@
+<drawable-list id="background" x="52" y="24" foreground="Gfx.COLOR_BLUE">
+    <shape type="circle" x="50" y="10" radius="9" />
+    <shape type="circle" x="10" y="90" radius="9" />
+    <shape type="circle" x="90" y="90" radius="9" />
+    <shape type="polygon" points="[[40,10], [60,10], [100,90], [90,100], [10,100], [1,90]]" />
+</drawable-list>
