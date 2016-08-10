@@ -1,3 +1,24 @@
+<!-- VivoActive HR width - height : 148 - 205 -->
 <layout id="MainLayout">
-    <label text="@Strings.heading" x="10" y="5" font="Gfx.FONT_SMALL" color="Gfx.COLOR_WHITE" />
+    <label text="@Strings.heading" x="10" y="5" font="Gfx.FONT_TINY" color="Gfx.COLOR_WHITE" />
+   	<button x="2" y="27" width="70" height="42" behavior="onPlayer1" />
+    <drawable id="player1field"/>
+    <label text="Player 1" x="5" y="25" font="Gfx.FONT_TINY" color="Gfx.COLOR_WHITE" />
+    <label text="0" x="35" y="43" font="Gfx.FONT_SMALL" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" />
+	<button x="74" y="27" width="70" height="42" behavior="onPlayer2" />
+	<drawable id="player2field"/>
+	<label text="Player 2" x="77" y="25" font="Gfx.FONT_TINY" color="Gfx.COLOR_WHITE" />
+    <label text="0" x="106" y="43" font="Gfx.FONT_SMALL" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" />
+	<button x="2" y="bottom" width="70" height="25" background="Gfx.COLOR_WHITE" >
+        <state id="stateDefault" bitmap="@Drawables.buttonResetDefault" />
+        <state id="stateHighlighted" bitmap="@Drawables.buttonResetSelected" />
+        <state id="stateSelected" bitmap="@Drawables.buttonResetSelected" />
+        <param name="behavior">onReset</param>
+    </button>
+	<drawable id="stepsfield"/>
+	<label text="Steps" x="5" y="82" font="Gfx.FONT_TINY" color="Gfx.COLOR_WHITE" />
+    <label text="0" x="35" y="98" font="Gfx.FONT_SMALL" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" />	
+	<drawable id="heartratefield"/>
+	<label text="Heart Rate" x="77" y="82" font="Gfx.FONT_TINY" color="Gfx.COLOR_WHITE" />
+
 </layout>

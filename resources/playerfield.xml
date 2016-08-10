@@ -1,0 +1,18 @@
+<resources>
+<drawable-list id="player1field" x="2" y="27" width="70" height="42">
+	<shape type="rectangle" x="0" y="0" width="70" height="42" color="Gfx.COLOR_BLACK" border_color="Gfx.COLOR_WHITE" border_width="2"/>
+</drawable-list>
+
+<drawable-list id="player2field" x="74" y="27" width="70" height="42">
+	<shape type="rectangle" x="0" y="0" width="70" height="42" color="Gfx.COLOR_BLACK" border_color="Gfx.COLOR_WHITE" border_width="2"/>
+</drawable-list>
+
+<drawable-list id="stepsfield" x="2" y="82" width="70" height="42">
+	<shape type="rectangle" x="0" y="0" width="70" height="42" color="Gfx.COLOR_BLACK" border_color="Gfx.COLOR_WHITE" border_width="2"/>
+</drawable-list>
+
+<drawable-list id="heartratefield" x="74" y="82" width="70" height="42">
+	<shape type="rectangle" x="0" y="0" width="70" height="42" color="Gfx.COLOR_BLACK" border_color="Gfx.COLOR_WHITE" border_width="2"/>
+</drawable-list>
+
+</resources>

@@ -3,11 +3,11 @@ using Toybox.WatchUi as Ui;
 class SquashDelegate extends Ui.BehaviorDelegate {
 
 	hidden var player1Score, player2Score;
+	hidden var scores;
 
-    function initialize(player1Score, player2Score) {
+    function initialize(scores) {
         BehaviorDelegate.initialize();
-        self.player1Score = player1Score;
-        self.player2Score = player2Score;
+        self.scores = scores;
     }
 
     function onMenu() {
@@ -15,48 +15,16 @@ class SquashDelegate extends Ui.BehaviorDelegate {
         return true;
     }
     
-    /*function onSwipe(evt)
-    {
-        var swipe = evt.getDirection();
-
-        if( swipe == SWIPE_UP )
-        {
-            setActionString("SWIPE_UP");
-        }
-        else if( swipe == SWIPE_RIGHT )
-        {
-            setActionString("SWIPE_RIGHT");
-        }
-        else if( swipe == SWIPE_DOWN )
-        {
-            setActionString("SWIPE_DOWN");
-        }
-        else if( swipe == SWIPE_LEFT )
-        {
-            setActionString("SWIPE_LEFT");
-        }
-
-        return true;
-    }*/
-    
-    function onTap(evt)
-    {
-    	var x = evt.getCoordinates()[0];
-    	var y = evt.getCoordinates()[1];
-        if (isHitting(x,y, player1Score)) {
-        	self.player1Score.score++;
-        	Ui.requestUpdate();
-        }
-        else if (isHitting(x,y, player2Score)) {
-        	player2Score.score++;
-        	Ui.requestUpdate();
-        }
-        return true;
+    function onReset() {
+    	scores.reset();
     }
     
-    function isHitting(x, y, playerScore) {
-    	return (((x > playerScore.xStart) && (x < playerScore.xEnd)) && 
-    			((y > playerScore.yStart) && (y < playerScore.yEnd)));
+    function onPlayer1(){
+    	scores.player1Score++;
+    }
+    
+    function onPlayer2(){
+    	scores.player2Score++;
     }
 
 }

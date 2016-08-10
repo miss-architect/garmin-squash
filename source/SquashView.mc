@@ -12,14 +12,15 @@ function setActionString(new_string)
 }
 
 class SquashView extends Ui.View {
-	hidden var player1Score, player2Score;
 	hidden var activityInfo;
 	hidden var stepTracker;
+	hidden var heartRate;
+	hidden var scores;
 
-    function initialize(player1Score, player2Score) {
+    function initialize(scores) {
         View.initialize();
-        self.player1Score = player1Score;
-        self.player2Score = player2Score;
+        self.scores = scores;
+        heartRate = 0;
         stepTracker = new StepTracker();
         
         Snsr.setEnabledSensors( [Snsr.SENSOR_HEARTRATE] );
@@ -29,8 +30,8 @@ class SquashView extends Ui.View {
     //! Load your resources here
     function onLayout(dc) {
         setLayout(Rez.Layouts.MainLayout(dc));
-        player1Score.setConfiguration(dc, 0);
-        player2Score.setConfiguration(dc, (dc.getWidth() / 2));
+        //player1Score.setConfiguration(dc, 0);
+        //player2Score.setConfiguration(dc, (dc.getWidth() / 2));
     }
 
     //! Called when this View is brought to the foreground. Restore
@@ -38,16 +39,20 @@ class SquashView extends Ui.View {
     //! loading resources into memory.
     function onShow() {
     }
-
+    
     //! Update the view
     function onUpdate(dc) {
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
         dc.setColor(Gfx.COLOR_WHITE, Gfx.COLOR_BLACK);
-        player1Score.draw();
-        player2Score.draw();
+        //player1Score.draw();
+        //player2Score.draw();
         stepTracker.update();
-        System.println(stepTracker.getNumberOfSteps()); 
+        
+        dc.drawText(35, 43, Gfx.FONT_SMALL, scores.player1Score, Gfx.TEXT_JUSTIFY_CENTER);
+        dc.drawText(106, 43, Gfx.FONT_SMALL, scores.player2Score, Gfx.TEXT_JUSTIFY_CENTER);
+        dc.drawText(35, 98, Gfx.FONT_SMALL, stepTracker.getNumberOfSteps(), Gfx.TEXT_JUSTIFY_CENTER);
+        dc.drawText(106, 98, Gfx.FONT_SMALL, heartRate, Gfx.TEXT_JUSTIFY_CENTER);
     }
 
     //! Called when this View is removed from the screen. Save the
@@ -58,22 +63,14 @@ class SquashView extends Ui.View {
     
     function onSnsr(sensor_info)
     {
-        /*var HR = sensor_info.heartRate;
-        var bucket;
         if( sensor_info.heartRate != null )
         {
-            string_HR = HR.toString() + "bpm";
-
-			System.println(string_HR);
-            //Add value to graph
-            //HR_graph.addItem(HR);
+        	heartRate = sensor_info.heartRate.toString();
         }
         else
         {
-            string_HR = "---bpm";
-        }*/
-       
-        System.println(sensor_info.heartRate);
+        	heartRate = "---";
+        }
         Ui.requestUpdate();
     }
 
