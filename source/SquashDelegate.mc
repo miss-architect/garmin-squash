@@ -1,5 +1,4 @@
 using Toybox.WatchUi as Ui;
-using Toybox.ActivityRecording as Record;
 using Toybox.Attention as Attention;
 using Toybox.Time as Time;
 
@@ -7,35 +6,23 @@ var session = null;
 var sessionStarted = null;
 
 class SquashDelegate extends Ui.BehaviorDelegate {
+	
+	hidden var dataTracker;
 
-	hidden var player1Score, player2Score;
-	hidden var scores;
-
-    function initialize(scores) {
+    function initialize(dataTracker) {
         BehaviorDelegate.initialize();
-        self.scores = scores;
+        self.dataTracker = dataTracker;
     }
 
     function onMenu() {
-        if(Toybox has :ActivityRecording ) {
-            if( ( session == null ) || ( session.isRecording() == false ) ) {
-                session = Record.createSession({:name=>"Squash", 
-                								:sport=>Record.SPORT_TENNIS, 
-                								:subSport=>Record.SUB_SPORT_MATCH});
-                session.start();
-                sessionStarted = Time.now();
-                vibrate();
-                Ui.requestUpdate();
-            }
-            else if( ( session != null ) && session.isRecording() ) {
-                session.stop();
-                session.save();
-                sessionStarted = null;
-                vibrate();
-                session = null;
-                Ui.requestUpdate();
-            }
-        }
+    	if (dataTracker.getSession().isRecording()) {
+    		dataTracker.getSession().stop();
+    	}
+    	else {
+    		dataTracker.getSession().start();
+    	}
+		vibrate();
+		Ui.requestUpdate();
         return true;
     }
     
@@ -56,15 +43,15 @@ class SquashDelegate extends Ui.BehaviorDelegate {
     }
     
     function onReset() {
-    	scores.reset();
+    	dataTracker.reset();
     }
     
     function onPlayer1(){
-    	scores.player1Score++;
+    	dataTracker.incrementPlayer1Score();
     }
     
     function onPlayer2(){
-    	scores.player2Score++;
+    	dataTracker.incrementPlayer2Score();
     }
 
 }

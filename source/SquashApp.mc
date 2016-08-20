@@ -3,8 +3,11 @@ using Toybox.WatchUi as Ui;
 
 class SquashApp extends App.AppBase {
 
+	hidden var dataTracker;
+
     function initialize() {
         AppBase.initialize();
+        dataTracker = new DataTracker();
     }
 
     //! onStart() is called on application start up
@@ -14,12 +17,14 @@ class SquashApp extends App.AppBase {
 
     //! onStop() is called when your application is exiting
     function onStop(state) {
+    	// Stop the recoding session in case it was
+    	// not stopped before.
+    	dataTracker.getSession().stop();
     }
 
     //! Return the initial view of your application here
     function getInitialView() {
-    	var scores = new PlayerScores();
-        return [new SquashView(scores), new SquashDelegate(scores) ];
+        return [new SquashView(dataTracker), new SquashDelegate(dataTracker) ];
     }
 
 }
