@@ -1,14 +1,20 @@
 using Toybox.ActivityRecording as Record;
 
+//! Class used to record an activity
 class Session {
 
+	//! Garmin session object
 	hidden var session;
+	//! Time when the session started
 	hidden var sessionStarted;
 	
+	//! Constructor
 	function initialize() {
 		session = null;
 	}
 	
+	//! Start recording a new session
+	//! If the session was already recording, nothing happens
 	function start(){
 	    if(Toybox has :ActivityRecording ) {
 	    	if(!isRecording()) {
@@ -21,6 +27,8 @@ class Session {
 	    }
 	}
 	
+	//! Stops the current session
+	//! If the session was already stopped, nothing happens
 	function stop() {
 		if(isRecording()) {
             session.stop();
@@ -29,11 +37,13 @@ class Session {
             session = null;
         }
 	}
-
+	
+	//! Returns true if the session is recording
 	function isRecording() {
 		return (session != null) && session.isRecording();
 	}
 	
+	//! Returns a string containing the session's elapsed time
 	function getElapsedTime(){
 			var time = "0:00:00";
 			if (isRecording()) {

@@ -4,11 +4,19 @@ using Toybox.Graphics as Gfx;
 using Toybox.Sensor as Snsr;
 using Toybox.Time as Time;
 
-
+//! Class that represents the main Squash App
+//! View
 class SquashView extends Ui.View {
+
+	//! Value of current heart rate read from sensor
 	hidden var heartRate;
+	//! Object that contains the data that will
+	//! be displayed on screen
 	hidden var dataTracker;
 
+	//! Constructor
+	//! @param dataTracker Shared objtect that contains 
+	//! 	  the data that will be displayed on screen
     function initialize(dataTracker) {
         View.initialize();
         self.dataTracker = dataTracker;
@@ -18,7 +26,7 @@ class SquashView extends Ui.View {
         Snsr.enableSensorEvents( method(:onSnsr) );
     }
 
-    //! Load your resources here
+    //! Load resources
     function onLayout(dc) {
         setLayout(Rez.Layouts.MainLayout(dc));
     }
@@ -53,6 +61,7 @@ class SquashView extends Ui.View {
     function onHide() {
     }
     
+    //! Function called to read heart rate sensor value
     function onSnsr(sensor_info)
     {
         if( sensor_info.heartRate != null )
