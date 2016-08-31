@@ -1,5 +1,4 @@
 using Toybox.WatchUi as Ui;
-using Toybox.Attention as Attention;
 using Toybox.Time as Time;
 
 //! Class that handles events coming from
@@ -51,7 +50,7 @@ class SquashDelegate extends Ui.BehaviorDelegate {
 	        else {
 	    		Ui.pushView(new WinGameView({:player=>"Player 2", 
 								:dataTracker=>dataTracker}), 
-		        			new Ui.BehaviorDelegate(), Ui.SLIDE_IMMEDIATE);
+		        			new WinGameDelegate(dataTracker), Ui.SLIDE_IMMEDIATE);
 	        }
     	}
     }
@@ -68,7 +67,7 @@ class SquashDelegate extends Ui.BehaviorDelegate {
 	        else {
 	    		Ui.pushView(new WinGameView({:player=>"Player 2", 
 								:dataTracker=>dataTracker}), 
-		        			new Ui.BehaviorDelegate(), Ui.SLIDE_IMMEDIATE);
+		        			new WinGameDelegate(dataTracker), Ui.SLIDE_IMMEDIATE);
 	        }
     	}
     }

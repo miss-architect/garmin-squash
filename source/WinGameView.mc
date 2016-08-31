@@ -26,5 +26,5 @@ class WinGameView extends Ui.View {
         var gameScore = data[:dataTracker].getGameScore();
         dc.drawText(x, y, Gfx.FONT_SMALL,  gameScore[0] + " - " + gameScore[1], Gfx.TEXT_JUSTIFY_CENTER);
     }
-
+    
 }
