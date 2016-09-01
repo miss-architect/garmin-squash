@@ -53,7 +53,6 @@ class SetsTracker {
 	//! Returns true is the given player won the current set
 	//! @param player  PLAYER_1 or PLAYER_2
 	function didPlayerWin(player) {
-	System.println(sets[currentSet][player] + " - " + sets[currentSet][1 - player]);
 		return ((sets[currentSet][player] >= MAX_SCORE) &&
 				(sets[currentSet][player] - sets[currentSet][1 - player] > 1));
 	}
