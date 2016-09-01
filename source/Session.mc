@@ -23,6 +23,7 @@ class Session {
 	        									:subSport=>Record.SUB_SPORT_MATCH});
 	        	session.start();
 	        	sessionStarted = Time.now();
+	        	vibrate();
 	        }
 	    }
 	}
@@ -35,6 +36,7 @@ class Session {
             session.save();
             sessionStarted = null;
             session = null;
+        	vibrate();
         }
 	}
 	
@@ -60,4 +62,22 @@ class Session {
 			
 			return time;
 	}
+	
+	//! Performs a vibration. Used as feedback to the user
+    //! for starting and stopping recording the session
+    function vibrate() {
+    	if (Attention has :vibrate) {
+            var vibrateData = [
+                    new Attention.VibeProfile(  25, 100 ),
+                    new Attention.VibeProfile(  50, 100 ),
+                    new Attention.VibeProfile(  75, 100 ),
+                    new Attention.VibeProfile( 100, 100 ),
+                    new Attention.VibeProfile(  75, 100 ),
+                    new Attention.VibeProfile(  50, 100 ),
+                    new Attention.VibeProfile(  25, 100 )
+                  ];
+
+            Attention.vibrate(vibrateData);
+        }
+    }
 }

@@ -1,5 +1,4 @@
 using Toybox.WatchUi as Ui;
-using Toybox.Attention as Attention;
 using Toybox.Time as Time;
 
 //! Class that handles events coming from
@@ -26,29 +25,12 @@ class SquashDelegate extends Ui.BehaviorDelegate {
     		dataTracker.getSession().stop();
     	}
     	else {
+    		// Let's set all counters to 0, just in case
+    		dataTracker.restart();
     		dataTracker.getSession().start();
     	}
-		vibrate();
 		Ui.requestUpdate();
         return true;
-    }
-    
-    //! Performs a vibration. Used as feedback to the user
-    //! for starting and stopping recording the session
-    function vibrate() {
-    	if (Attention has :vibrate) {
-            var vibrateData = [
-                    new Attention.VibeProfile(  25, 100 ),
-                    new Attention.VibeProfile(  50, 100 ),
-                    new Attention.VibeProfile(  75, 100 ),
-                    new Attention.VibeProfile( 100, 100 ),
-                    new Attention.VibeProfile(  75, 100 ),
-                    new Attention.VibeProfile(  50, 100 ),
-                    new Attention.VibeProfile(  25, 100 )
-                  ];
-
-            Attention.vibrate(vibrateData);
-        }
     }
     
     //! Function called when the reset button of the UI is pressed.
@@ -58,12 +40,36 @@ class SquashDelegate extends Ui.BehaviorDelegate {
     
     //! Function called when the player 1 score button is pressed.
     function onPlayer1(){
-    	dataTracker.incrementPlayer1Score();
+    	if (dataTracker.getSession().isRecording() && 
+    		dataTracker.incrementPlayer1Score()) {
+    		if (!dataTracker.isGameOver()) {
+	    		Ui.pushView(new WinSetView({:player=>"Player 1", 
+		        							:gameScore=>dataTracker.getGameScore()}), 
+		        			new Ui.BehaviorDelegate(), Ui.SLIDE_IMMEDIATE);
+	        }
+	        else {
+	    		Ui.pushView(new WinGameView({:player=>"Player 1", 
+								:dataTracker=>dataTracker}), 
+		        			new WinGameDelegate(dataTracker), Ui.SLIDE_IMMEDIATE);
+	        }
+    	}
     }
     
     //! Function called when the player 2 score button is pressed.
     function onPlayer2(){
-    	dataTracker.incrementPlayer2Score();
+    	if (dataTracker.getSession().isRecording() && 
+    		dataTracker.incrementPlayer2Score()) {
+    		if (!dataTracker.isGameOver()) {
+	    		Ui.pushView(new WinSetView({:player=>"Player 2", 
+								:gameScore=>dataTracker.getGameScore()}), 
+		        			new Ui.BehaviorDelegate(), Ui.SLIDE_IMMEDIATE);
+	        }
+	        else {
+	    		Ui.pushView(new WinGameView({:player=>"Player 2", 
+								:dataTracker=>dataTracker}), 
+		        			new WinGameDelegate(dataTracker), Ui.SLIDE_IMMEDIATE);
+	        }
+    	}
     }
 
 }

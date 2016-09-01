@@ -3,6 +3,8 @@ using Toybox.ActivityMonitor as Act;
 //! Class that holds the data that has to be
 //! valculated and is displayed in the UI.
 class DataTracker {
+	//! Points to win a set
+	hidden var SCORE_FOR_SET = 11;
 	//! Number of steps done during the activity
 	hidden var numberOfSteps;
 	//! Number of calories burned during the activity
@@ -11,12 +13,10 @@ class DataTracker {
 	hidden var initialSteps;
 	//! Amount of calories burnt until the activity started
 	hidden var initialCalories;
-	//! Score of player 1
-	hidden var player1Score;
-	//! Score of player 2
-	hidden var player2Score;
 	//! Session used to record the activity
 	hidden var session;
+	//! Sets tracker
+	hidden var setsTracker;
 	
 	//! Constructor
 	function initialize() {
@@ -32,11 +32,10 @@ class DataTracker {
         var activityInfo = Act.getInfo();
         initialSteps = activityInfo.steps;
         initialCalories = activityInfo.calories;
-       	player1Score = 0;
-		player2Score = 0;
 		if (session != null && session.isRecording()) {
 			session.stop();
 		}
+		setsTracker = new SetsTracker();
 	}
 	
 	//! Updates the calculated values taken from
@@ -60,28 +59,38 @@ class DataTracker {
 	
 	//! Returns the score of player 1
 	function getPlayer1Score() {
-		return player1Score;
+		return setsTracker.getPlayerScore(0);
 	}
 	
 	//! Returns the score of player 2
 	function getPlayer2Score() {
-		return player2Score;
+		return setsTracker.getPlayerScore(1);
 	}
 	
 	//! Increments by 1 the score of player 1
 	function incrementPlayer1Score() {
-		player1Score++;
+		return setsTracker.increaseScore(0);
 	}
 	
 	//! Increments by 1 the score of player 2
 	function incrementPlayer2Score() {
-		player2Score++;
+		return setsTracker.increaseScore(1);
+	}
+	
+	//! Get the total game score for both players
+	//! @return array of 2 elements containg the scores
+	function getGameScore(){
+		return setsTracker.getGameScore();
+	}
+	
+	//! Returns true if the game is over
+	function isGameOver(){
+		return setsTracker.isGameOver();
 	}
 	
 	//! Resets players' score counters
 	function reset() {
-		player1Score = 0;
-		player2Score = 0;
+		setsTracker.resetCurrentSet();
 	}
 	
 	//! Returns the session that records the activity
