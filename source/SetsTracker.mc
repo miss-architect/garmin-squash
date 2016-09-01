@@ -27,14 +27,15 @@ class SetsTracker {
 	//! @param player PLAYER_1 or PLAYER_2
 	function increaseScore(player) {
 		// Assert that player is 0 or 1.
-		var won = didPlayerWon(player);
+		var won = false;
 		if (!isGameOver()) {
 			sets[currentSet][player]++;
-			if (won) {
+			if (didPlayerWin(player)) {
 				updateGameScores(player);
+				return true;
 			}
 		}
-		return won;
+		return false;
 	}
 	
 	//! Private method that increments the total score
@@ -51,8 +52,9 @@ class SetsTracker {
 	
 	//! Returns true is the given player won the current set
 	//! @param player  PLAYER_1 or PLAYER_2
-	function didPlayerWon(player) {
-		return ((sets[currentSet][player] >= (MAX_SCORE - 1)) &&
+	function didPlayerWin(player) {
+	System.println(sets[currentSet][player] + " - " + sets[currentSet][1 - player]);
+		return ((sets[currentSet][player] >= MAX_SCORE) &&
 				(sets[currentSet][player] - sets[currentSet][1 - player] > 1));
 	}
 	

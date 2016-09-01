@@ -48,7 +48,7 @@ class SquashDelegate extends Ui.BehaviorDelegate {
 		        			new Ui.BehaviorDelegate(), Ui.SLIDE_IMMEDIATE);
 	        }
 	        else {
-	    		Ui.pushView(new WinGameView({:player=>"Player 2", 
+	    		Ui.pushView(new WinGameView({:player=>"Player 1", 
 								:dataTracker=>dataTracker}), 
 		        			new WinGameDelegate(dataTracker), Ui.SLIDE_IMMEDIATE);
 	        }
