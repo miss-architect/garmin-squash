@@ -38,16 +38,20 @@ class SetsTracker {
 		return false;
 	}
 	
+	//! Initializes the counter for a new set.
+	function startNewSet(){
+		if (!isGameOver()) {
+			currentSet++;
+			sets[currentSet] = [0, 0];
+		}
+	}
+	
 	//! Private method that increments the total score
 	//! for the given player and starts a new set if
 	//! the game is not over
 	//! @param player  PLAYER_1 or PLAYER_2
 	hidden function updateGameScores(player){
 		gameScore[player]++;
-		if (!isGameOver()) {
-			currentSet++;
-			sets[currentSet] = [0, 0];
-		}
 	}
 	
 	//! Returns true is the given player won the current set
