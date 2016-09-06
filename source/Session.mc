@@ -93,17 +93,8 @@ class Session {
         }
     }
 	
-	// Initializes the new Namaste field in the activity file
+	//! Initializes the score fields in the activity file
 	hidden function setupFields() {
-	    // Create a new field in the session.
-	    // Current namastes provides an file internal definition of the field
-	    // Field id _must_ match the fitField id in resources or your data will not display!
-	    // The field type specifies the kind of data we are going to store. For Record data this must be numeric, for others it can also be a string.
-	    // The mesgType allows us to say what kind of FIT record we are writing.
-	    //    FitContributor.MESG_TYPE_RECORD for graph information
-	    //    FitContributor.MESG_TYPE_LAP for lap information
-	    //    FitContributor.MESG_TYPE_SESSION` for summary information.
-	    // Units provides a file internal units field.
 	    player1ScoreField = session.createField("player1score", PLAYER1_FIELD_ID, FitContributor.DATA_TYPE_UINT8, { :mesgType=>Fit.MESG_TYPE_LAP });
 		player1ScoreField.setData(0);
 		player2ScoreField = session.createField("player2score", PLAYER2_FIELD_ID, FitContributor.DATA_TYPE_UINT8, { :mesgType=>Fit.MESG_TYPE_LAP });
@@ -114,13 +105,20 @@ class Session {
 		player2GameScoreField.setData(0);
 	}
 	
+	//! Record the set scores for each player and adds a new
+	//! lap
+	//! @param  player1score  Score of player 1
+	//! @param  player2score  Score of player 2
 	function recordSetScore(player1score, player2score) {
-		System.println(player1score + " - " + player2score);
 		player1ScoreField.setData(player1score);
 		player2ScoreField.setData(player2score);
 		session.addLap();
 	}
 	
+	//! Record the game scores for each player. It
+	//! should be recored in the activity summary
+	//! @param  player1score  Score of player 1
+	//! @param  player2score  Score of player 2
 	function saveGameScore(player1score, player2score) {
 		player1GameScoreField.setData(player1score);
 		player2GameScoreField.setData(player2score);	
