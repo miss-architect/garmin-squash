@@ -45,6 +45,7 @@ class SquashDelegate extends Ui.BehaviorDelegate {
     	if (dataTracker.getSession().isRecording() && 
     		dataTracker.incrementPlayer1Score()) {
     		if (!dataTracker.isGameOver()) {
+		        dataTracker.getSession().addLap();
 	    		Ui.pushView(new WinSetView({:player=>"Player 1", 
 		        							:gameScore=>dataTracker.getGameScore()}), 
 		        			new Ui.BehaviorDelegate(), Ui.SLIDE_IMMEDIATE);
@@ -62,6 +63,7 @@ class SquashDelegate extends Ui.BehaviorDelegate {
     	if (dataTracker.getSession().isRecording() && 
     		dataTracker.incrementPlayer2Score()) {
     		if (!dataTracker.isGameOver()) {
+	        	dataTracker.getSession().addLap();
 	    		Ui.pushView(new WinSetView({:player=>"Player 2", 
 								:gameScore=>dataTracker.getGameScore()}), 
 		        			new Ui.BehaviorDelegate(), Ui.SLIDE_IMMEDIATE);

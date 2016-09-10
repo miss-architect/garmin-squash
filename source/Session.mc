@@ -112,7 +112,15 @@ class Session {
 	function recordSetScore(player1score, player2score) {
 		player1ScoreField.setData(player1score);
 		player2ScoreField.setData(player2score);
+	}
+	
+	//! Adds a new lap to the fit file and
+	//! sets players' score counters to 0
+	//! (new set starts)
+	function addLap() {
 		session.addLap();
+		player1ScoreField.setData(0);
+		player2ScoreField.setData(0);
 	}
 	
 	//! Record the game scores for each player. It
