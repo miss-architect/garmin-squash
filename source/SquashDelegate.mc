@@ -22,7 +22,9 @@ class SquashDelegate extends Ui.BehaviorDelegate {
 	//! the session
     function onMenu() {
     	if (dataTracker.getSession().isRecording()) {
-    		dataTracker.getSession().stop();
+	    	//TODO: Implement this logic in a more encapsulated way
+	    	dataTracker.getSession().saveGameScore(dataTracker.getGameScore()[0], dataTracker.getGameScore()[1]);
+	    	dataTracker.getSession().stop();
     	}
     	else {
     		// Let's set all counters to 0, just in case
@@ -43,6 +45,7 @@ class SquashDelegate extends Ui.BehaviorDelegate {
     	if (dataTracker.getSession().isRecording() && 
     		dataTracker.incrementPlayer1Score()) {
     		if (!dataTracker.isGameOver()) {
+		        dataTracker.getSession().addLap();
 	    		Ui.pushView(new WinSetView({:player=>"Player 1", 
 		        							:gameScore=>dataTracker.getGameScore()}), 
 		        			new Ui.BehaviorDelegate(), Ui.SLIDE_IMMEDIATE);
@@ -60,6 +63,7 @@ class SquashDelegate extends Ui.BehaviorDelegate {
     	if (dataTracker.getSession().isRecording() && 
     		dataTracker.incrementPlayer2Score()) {
     		if (!dataTracker.isGameOver()) {
+	        	dataTracker.getSession().addLap();
 	    		Ui.pushView(new WinSetView({:player=>"Player 2", 
 								:gameScore=>dataTracker.getGameScore()}), 
 		        			new Ui.BehaviorDelegate(), Ui.SLIDE_IMMEDIATE);

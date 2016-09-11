@@ -38,16 +38,20 @@ class SetsTracker {
 		return false;
 	}
 	
+	//! Initializes the counter for a new set.
+	function startNewSet(){
+		if (!isGameOver()) {
+			currentSet++;
+			sets[currentSet] = [0, 0];
+		}
+	}
+	
 	//! Private method that increments the total score
 	//! for the given player and starts a new set if
 	//! the game is not over
 	//! @param player  PLAYER_1 or PLAYER_2
 	hidden function updateGameScores(player){
 		gameScore[player]++;
-		if (!isGameOver()) {
-			currentSet++;
-			sets[currentSet] = [0, 0];
-		}
 	}
 	
 	//! Returns true is the given player won the current set
@@ -55,6 +59,11 @@ class SetsTracker {
 	function didPlayerWin(player) {
 		return ((sets[currentSet][player] >= MAX_SCORE) &&
 				(sets[currentSet][player] - sets[currentSet][1 - player] > 1));
+	}
+	
+	//! Returns if anyPlayerWon the current set
+	hidden function anyPlayerWon() {
+		return (didPlayerWin(PLAYER_1) || didPlayerWin(PLAYER_2));
 	}
 	
 	//! Get all sets
@@ -77,13 +86,23 @@ class SetsTracker {
 		return gameScore;
 	}
 	
+	//! Returns true if it's the current set is the last one
+	hidden function isTheLastSet() {
+		return (currentSet == (TOTAL_SETS - 1));
+	}
+	
+	//! Returns true if the player losing the match cannot
+	//! win with the remaining sets
+	hidden function theLoserCannotWin() {
+		var setDifference = (gameScore[PLAYER_1] - gameScore[PLAYER_2]).abs();
+		// Someone is winning and the remaining sets cannot make the loser win
+		return  ((setDifference > 0) &&
+				((TOTAL_SETS - 1) - currentSet) < setDifference);
+	}
+	
 	//! Returns true if the game is over
 	function isGameOver(){
-		var setDifference = (gameScore[PLAYER_1] - gameScore[PLAYER_2]).abs();
-		return ((currentSet == (TOTAL_SETS - 1)) || 
-				// Someone is winning and the remaining sets cannot make the loser win
-				((setDifference > 0) &&
-				((TOTAL_SETS - 1) - currentSet) < setDifference));
+		return (anyPlayerWon() && (isTheLastSet() || theLoserCannotWin()));
 	}
 	
 	//! Resets the counters of the current set for both players.

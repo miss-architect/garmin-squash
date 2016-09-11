@@ -33,6 +33,8 @@ class DataTracker {
         initialSteps = activityInfo.steps;
         initialCalories = activityInfo.calories;
 		if (session != null && session.isRecording()) {
+			var gameScore = setsTracker.getGameScore();
+			session.saveGameScore(gameScore[0], gameScore[1]);
 			session.stop();
 		}
 		setsTracker = new SetsTracker();
@@ -69,12 +71,24 @@ class DataTracker {
 	
 	//! Increments by 1 the score of player 1
 	function incrementPlayer1Score() {
-		return setsTracker.increaseScore(0);
+		var wonSet = setsTracker.increaseScore(0);
+	
+		if (wonSet) {
+			session.recordSetScore(setsTracker.getPlayerScore(0), setsTracker.getPlayerScore(1));
+			setsTracker.startNewSet();
+		}
+		return wonSet;
 	}
 	
 	//! Increments by 1 the score of player 2
 	function incrementPlayer2Score() {
-		return setsTracker.increaseScore(1);
+		var wonSet = setsTracker.increaseScore(1);
+		
+		if (wonSet) {
+			session.recordSetScore(setsTracker.getPlayerScore(0), setsTracker.getPlayerScore(1));
+			setsTracker.startNewSet();
+		}
+		return wonSet;
 	}
 	
 	//! Get the total game score for both players
