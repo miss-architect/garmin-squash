@@ -1,5 +1,6 @@
 using Toybox.Application as App;
 using Toybox.WatchUi as Ui;
+using Toybox.Sensor as Snsr;
 
 //! Class that represents the Squash Application
 class SquashApp extends App.AppBase {
@@ -28,6 +29,8 @@ class SquashApp extends App.AppBase {
     		dataTracker.getSession().saveGameScore(dataTracker.getGameScore()[0], dataTracker.getGameScore()[1]);
     		dataTracker.getSession().stop();
     	}
+    	// Let's disable the heart rate sensor
+    	Snsr.setEnabledSensors([]);
     }
 
     //! Return the initial view of application
