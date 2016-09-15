@@ -5,6 +5,16 @@ using Toybox.Sensor as Snsr;
 using Toybox.Time as Time;
 using Toybox.System as System;
 
+//! These are four global variables used by the
+//! SquashDelegate to determine if the user
+//! touch a player score button. This implementation
+//! is ugly, and it must be replaced by the button
+//! if it's ever offered in the sdk of older devices
+var player1LocX = 0;
+var player2LocX = 0;
+var heightButton = 0;
+var widthButton = 0; 
+
 
 //! Class that represents the main Squash App
 //! View
@@ -48,36 +58,16 @@ class SquashView extends Ui.View {
         	initialY += 10;
         }
         
-   		var heightButton = dc.getFontHeight(Gfx.FONT_TINY) + dc.getFontHeight(Gfx.FONT_NUMBER_MILD) + VERTICAL_SPACING;
-   		var widthButton = dc.getWidth() / 2;
-   		var highlighted = new Ui.Bitmap({:rezId=>Rez.Drawables.buttonResetSelected});
-   		var options = {
-            :locX=>0,
-            :locY=>initialY,
-            :width=>widthButton,
-            :height=>heightButton,
-            :behavior=>:onPlayer1,
-            :stateHighlighted=>Gfx.COLOR_RED
-            };
-        playerButtons = new [2];
-        playerButtons[0] = new Button(options);
-        
-        
-        options.put(:locX, dc.getWidth() / 2);
-        options.put(:behavior, :onPlayer2);
-        playerButtons[1] = new Button(options);
-        setLayout(playerButtons);
+   		heightButton = dc.getFontHeight(Gfx.FONT_TINY) + dc.getFontHeight(Gfx.FONT_NUMBER_MILD) + VERTICAL_SPACING;
+   		widthButton = (dc.getWidth() / 2) - HORIZONTAL_SPACING;
+   		player1LocX = 0;
+   		player2LocX = (dc.getWidth() / 2) + HORIZONTAL_SPACING;
     }
 
     //! Called when this View is brought to the foreground. Restore
     //! the state of this View and prepare it to be shown. This includes
     //! loading resources into memory.
     function onShow() {
-    	// If device does not have touch screen, let's activate
-    	// the hard key to be able to click player buttons.
-    	if (!System.getDeviceSettings().isTouchScreen) {
-    		setKeyToSelectableInteraction(true);
-    	}
     }
     
     //! Update the view
@@ -156,11 +146,6 @@ class SquashView extends Ui.View {
     		justify = Gfx.TEXT_JUSTIFY_LEFT;
     		button = 1;
     	}
-    	if (playerButtons[button].getState() == :stateHighlighted){
-    		dc.setColor(Gfx.COLOR_WHITE, Gfx.COLOR_RED);
-    	} else {
-    		dc.setColor(Gfx.COLOR_WHITE, Gfx.COLOR_BLACK);
-    	}
     	dc.drawText(x, y, Gfx.FONT_TINY, label, justify);
     	y = y + dc.getFontHeight(Gfx.FONT_TINY) + VERTICAL_SPACING;
         dc.drawText(x, y, Gfx.FONT_NUMBER_MILD, score, justify);
@@ -171,7 +156,6 @@ class SquashView extends Ui.View {
     //! state of this View here. This includes freeing resources from
     //! memory.
     function onHide() {
-    	setKeyToSelectableInteraction(false);
     }
     
     //! Function called to read heart rate sensor value
