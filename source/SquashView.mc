@@ -182,5 +182,4 @@ class SquashView extends Ui.View {
         }
         Ui.requestUpdate();
     }
-
 }
