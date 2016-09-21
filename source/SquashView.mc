@@ -105,9 +105,9 @@ class SquashView extends Ui.View {
         y = y + (VERTICAL_SPACING / 2);
 
         x = dc.getWidth() / 2 - HORIZONTAL_SPACING;
-        dc.drawText(x, y, Gfx.FONT_TINY, "Steps", Gfx.TEXT_JUSTIFY_RIGHT);
+        dc.drawText(x, y, Gfx.FONT_TINY, Ui.loadResource(Rez.Strings.steps_label), Gfx.TEXT_JUSTIFY_RIGHT);
         x = dc.getWidth() / 2 + HORIZONTAL_SPACING;
-        dc.drawText(x, y, Gfx.FONT_TINY, "Heart Rate", Gfx.TEXT_JUSTIFY_LEFT);
+        dc.drawText(x, y, Gfx.FONT_TINY, Ui.loadResource(Rez.Strings.hr_label), Gfx.TEXT_JUSTIFY_LEFT);
         y = y + dc.getFontHeight(Gfx.FONT_TINY) + VERTICAL_SPACING;
         x = dc.getWidth() / 2 - HORIZONTAL_SPACING;
         dc.drawText(x, y, Gfx.FONT_NUMBER_MILD, dataTracker.getNumberOfSteps(), Gfx.TEXT_JUSTIFY_RIGHT);
@@ -119,10 +119,10 @@ class SquashView extends Ui.View {
         y = y + (VERTICAL_SPACING / 2);
 
         x = dc.getWidth() / 2 - HORIZONTAL_SPACING;
-        dc.drawText(x, y, Gfx.FONT_TINY, "Time", Gfx.TEXT_JUSTIFY_RIGHT);
+        dc.drawText(x, y, Gfx.FONT_TINY, Ui.loadResource(Rez.Strings.time_label), Gfx.TEXT_JUSTIFY_RIGHT);
 
         x = dc.getWidth() / 2 + HORIZONTAL_SPACING;
-        dc.drawText(x, y, Gfx.FONT_TINY, "Calories", Gfx.TEXT_JUSTIFY_LEFT);
+        dc.drawText(x, y, Gfx.FONT_TINY, Ui.loadResource(Rez.Strings.calories_label), Gfx.TEXT_JUSTIFY_LEFT);
 
         y = y + dc.getFontHeight(Gfx.FONT_TINY) + VERTICAL_SPACING;
         x = dc.getWidth() / 2 - HORIZONTAL_SPACING;

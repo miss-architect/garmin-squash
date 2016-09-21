@@ -1,30 +1,33 @@
 <resources>
-	<strings>
-	    <string id="player1_score_label">Player 1</string>
-	    <string id="player2_score_label">Player 2</string>
-	    <string id="score_units">pts</string>
-	</strings>
-	<fitContributions>
-	    <fitField id="0" 
-	    displayInActivityLaps="true" 
-	    dataLabel="@Strings.player1_score_label"
-	    unitLabel="@Strings.score_units" 
-	    sortOrder="0"/>
-	<fitField id="1" 
-	   	displayInActivityLaps="true" 
-	    dataLabel="@Strings.player2_score_label"
-	    unitLabel="@Strings.score_units" 
-	    sortOrder="1"/>
-	 <fitField id="2" 
-	    displayInActivitySummary="true" 
-	    dataLabel="@Strings.player1_score_label"
-	    unitLabel="@Strings.score_units" 
-	    sortOrder="2"/>
-	  <fitField id="3" 
-	    displayInActivitySummary="true" 
-	    dataLabel="@Strings.player2_score_label"
-	    unitLabel="@Strings.score_units" 
-	    sortOrder="3"/>
-	    
-	</fitContributions>
+    <strings>
+        <string id="player1_score_label">Player 1</string>
+        <string id="player2_score_label">Player 2</string>
+        <string id="steps_label">Steps</string>
+        <string id="hr_label">Heart Rate</string>
+        <string id="time_label">Time</string>
+        <string id="calories_label">Calories</string>
+        <string id="score_units">pts</string>
+    </strings>
+    <fitContributions>
+        <fitField id="0"
+        displayInActivityLaps="true"
+        dataLabel="@Strings.player1_score_label"
+        unitLabel="@Strings.score_units"
+        sortOrder="0"/>
+    <fitField id="1"
+        displayInActivityLaps="true"
+        dataLabel="@Strings.player2_score_label"
+        unitLabel="@Strings.score_units"
+        sortOrder="1"/>
+     <fitField id="2"
+        displayInActivitySummary="true"
+        dataLabel="@Strings.player1_score_label"
+        unitLabel="@Strings.score_units"
+        sortOrder="2"/>
+      <fitField id="3"
+        displayInActivitySummary="true"
+        dataLabel="@Strings.player2_score_label"
+        unitLabel="@Strings.score_units"
+        sortOrder="3"/>
+    </fitContributions>
 </resources>
