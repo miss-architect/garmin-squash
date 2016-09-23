@@ -4,7 +4,9 @@ using Toybox.ActivityMonitor as Act;
 //! valculated and is displayed in the UI.
 class DataTracker {
     //! Points to win a set
-    hidden var SCORE_FOR_SET = 11;
+    hidden var SCORE_FOR_SET = 89;
+    //! Sets to win a match
+    hidden var SCORE_FOR_MATCH = 88;
     //! Number of steps done during the activity
     hidden var numberOfSteps;
     //! Number of calories burned during the activity
@@ -19,8 +21,10 @@ class DataTracker {
     hidden var setsTracker;
 
     //! Constructor
-    function initialize() {
+    function initialize(setMaxScore, setTotalSets) {
         session = new Session();
+        SCORE_FOR_SET = setMaxScore;
+        SCORE_FOR_MATCH = setTotalSets;
         restart();
     }
 
@@ -37,7 +41,7 @@ class DataTracker {
             session.saveGameScore(gameScore[0], gameScore[1]);
             session.stop();
         }
-        setsTracker = new SetsTracker();
+        setsTracker = new SetsTracker(SCORE_FOR_SET, SCORE_FOR_MATCH);
     }
 
     //! Updates the calculated values taken from
@@ -110,5 +114,18 @@ class DataTracker {
     //! Returns the session that records the activity
     function getSession() {
         return session;
+    }
+
+    function readKeyInt(myApp,key,thisDefault) {
+        var value = myApp.getProperty(key);
+
+        if(value == null || !(value instanceof Number)) {
+            if(value != null) {
+                value = value.toNumber();
+            } else {
+                value = thisDefault;
+            }
+        }
+        return value;
     }
 }

@@ -1,5 +1,29 @@
 <resources>
+    <properties>
+        <property id="appVersion" type="string">1.2.0</property>
+        <property id="setMaxScore" type="number">11</property>
+        <property id="setTotalSets" type="number">5</property>
+    </properties>
+
+    <settings>
+        <setting propertyKey="@Properties.setMaxScore" title="@Strings.setMaxScoreTitle" prompt="@Strings.setMaxScorePrompt">
+            <settingConfig type="numeric" min="9" max="21" errorMessage="@Strings.setMaxScoreError" />
+        </setting>
+
+        <setting propertyKey="@Properties.setTotalSets" title="@Strings.setTotalSetsTitle" prompt="@Strings.setTotalSetsPrompt">
+            <settingConfig type="numeric" errorMessage="@Strings.setTotalSetsError" />
+        </setting>
+    </settings>
+
     <strings>
+        <string id="setMaxScoreTitle">Set length</string>
+        <string id="setMaxScorePrompt">Score to win set</string>
+        <string id="setMaxScoreError">Choose between 9 and 21</string>
+
+        <string id="setTotalSetsTitle">Match length</string>
+        <string id="setTotalSetsPrompt">No of sets to win match</string>
+        <string id="setTotalSetsError">Error?!?</string>
+
         <string id="player1_score_label">Player 1</string>
         <string id="player2_score_label">Player 2</string>
         <string id="steps_label">Steps</string>
@@ -8,6 +32,7 @@
         <string id="calories_label">Calories</string>
         <string id="score_units">pts</string>
     </strings>
+
     <fitContributions>
         <fitField id="0"
         displayInActivityLaps="true"
@@ -30,4 +55,5 @@
         unitLabel="@Strings.score_units"
         sortOrder="3"/>
     </fitContributions>
+
 </resources>

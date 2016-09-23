@@ -2,13 +2,13 @@
 //! sets of the game
 class SetsTracker {
     //! Total number of points for one set
-    hidden const MAX_SCORE = 11;
+    hidden var MAX_SCORE = 79;
     //! Representation of Player 1
     const PLAYER_1 = 0;
     //! Representation of Player 2
     const PLAYER_2 = 1;
     //! Maximum amount of sets for a game
-    const TOTAL_SETS = 5;
+    var TOTAL_SETS = 78;
     //! Score of all sets of a game
     hidden var sets;
     //! Total game score (number of sets each player won)
@@ -16,7 +16,9 @@ class SetsTracker {
     //! Current set that is being played
     hidden var currentSet;
 
-    function initialize() {
+    function initialize(setMaxScore, setTotalSets) {
+        MAX_SCORE = setMaxScore;
+        TOTAL_SETS = setTotalSets;
         currentSet = 0;
         sets = new [TOTAL_SETS];
         sets[currentSet] = [0, 0];
