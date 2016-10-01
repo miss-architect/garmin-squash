@@ -3,8 +3,8 @@ using Toybox.Graphics as Gfx;
 
 class WinSetView extends Ui.View {
 
-	hidden var data;
-	hidden const VERTICAL_SPACE = 2;
+    hidden var data;
+    hidden const VERTICAL_SPACE = 2;
 
     function initialize(data) {
         View.initialize();
@@ -12,10 +12,10 @@ class WinSetView extends Ui.View {
     }
 
     function onUpdate(dc) {
-    	View.onUpdate(dc);
-    	var x = dc.getWidth() / 2;
-    	var y = dc.getHeight() / 4;
-    	dc.setColor(Gfx.COLOR_YELLOW, Gfx.COLOR_BLACK);
+        View.onUpdate(dc);
+        var x = dc.getWidth() / 2;
+        var y = dc.getHeight() / 4;
+        dc.setColor(Gfx.COLOR_YELLOW, Gfx.COLOR_BLACK);
         dc.drawText(x, y, Gfx.FONT_LARGE, data[:player], Gfx.TEXT_JUSTIFY_CENTER);
         dc.setColor(Gfx.COLOR_GREEN, Gfx.COLOR_BLACK);
         y = y + dc.getFontHeight(Gfx.FONT_LARGE) + VERTICAL_SPACE;
@@ -26,5 +26,4 @@ class WinSetView extends Ui.View {
         var gameScore = data[:gameScore];
         dc.drawText(x, y, Gfx.FONT_SMALL,  gameScore[0] + " - " + gameScore[1], Gfx.TEXT_JUSTIFY_CENTER);
     }
-
 }
