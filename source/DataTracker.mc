@@ -1,12 +1,12 @@
 using Toybox.ActivityMonitor as Act;
 
 //! Class that holds the data that has to be
-//! valculated and is displayed in the UI.
+//! calculated and is displayed in the UI.
 class DataTracker {
     //! Points to win a set
-    hidden var SCORE_FOR_SET = 89;
+    hidden var scoreForSet = 89;
     //! Sets to win a match
-    hidden var SCORE_FOR_MATCH = 88;
+    hidden var scoreForMatch = 88;
     //! Number of steps done during the activity
     hidden var numberOfSteps;
     //! Number of calories burned during the activity
@@ -23,8 +23,8 @@ class DataTracker {
     //! Constructor
     function initialize(setMaxScore, setTotalSets) {
         session = new Session();
-        SCORE_FOR_SET = setMaxScore;
-        SCORE_FOR_MATCH = setTotalSets;
+        scoreForSet = setMaxScore;
+        scoreForMatch = setTotalSets;
         restart();
     }
 
@@ -41,7 +41,7 @@ class DataTracker {
             session.saveGameScore(gameScore[0], gameScore[1]);
             session.stop();
         }
-        setsTracker = new SetsTracker(SCORE_FOR_SET, SCORE_FOR_MATCH);
+        setsTracker = new SetsTracker(scoreForSet, scoreForMatch);
     }
 
     //! Updates the calculated values taken from
@@ -50,7 +50,7 @@ class DataTracker {
         var activityInfo = Act.getInfo();
         numberOfSteps = activityInfo.steps - initialSteps;
         numberOfCalories = activityInfo.calories - initialCalories;
-        
+
     }
 
     //! Returns the number of steps done during the current activity

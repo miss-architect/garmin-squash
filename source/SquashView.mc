@@ -54,14 +54,15 @@ class SquashView extends Ui.View {
     //! Load resources
     function onLayout(dc) {
         initialY = EXTRA_VERTICAL_SPACING;
+
         if (System.getDeviceSettings().screenShape == System.SCREEN_SHAPE_ROUND) {
             initialY += 10;
         }
-        
-   	    heightButton = dc.getFontHeight(Gfx.FONT_TINY) + dc.getFontHeight(Gfx.FONT_NUMBER_MILD) + VERTICAL_SPACING;
-   	    widthButton = (dc.getWidth() / 2) - HORIZONTAL_SPACING;
-   	    player1LocX = 0;
-   	    player2LocX = (dc.getWidth() / 2) + HORIZONTAL_SPACING;
+
+       heightButton = dc.getFontHeight(Gfx.FONT_TINY) + dc.getFontHeight(Gfx.FONT_NUMBER_MILD) + VERTICAL_SPACING;
+       widthButton = (dc.getWidth() / 2) - HORIZONTAL_SPACING;
+       player1LocX = 0;
+       player2LocX = (dc.getWidth() / 2) + HORIZONTAL_SPACING;
     }
 
     //! Called when this View is brought to the foreground. Restore
@@ -136,14 +137,14 @@ class SquashView extends Ui.View {
     //! @param label  Label that indicates which player it is
     //! @param score  Score to draw in the button
     hidden function drawPlayerButton(dc, x, y, label, score){
-    	var justify = Gfx.TEXT_JUSTIFY_RIGHT;
-    	var button = 0;
-    	if (label.equals(Ui.loadResource(Rez.Strings.player2_score_label))) {
-    		justify = Gfx.TEXT_JUSTIFY_LEFT;
-    		button = 1;
-    	}
-    	dc.drawText(x, y, Gfx.FONT_TINY, label, justify);
-    	y = y + dc.getFontHeight(Gfx.FONT_TINY) + VERTICAL_SPACING;
+        var justify = Gfx.TEXT_JUSTIFY_RIGHT;
+        var button = 0;
+        if (label.equals(Ui.loadResource(Rez.Strings.player2_score_label))) {
+            justify = Gfx.TEXT_JUSTIFY_LEFT;
+            button = 1;
+        }
+        dc.drawText(x, y, Gfx.FONT_TINY, label, justify);
+        y = y + dc.getFontHeight(Gfx.FONT_TINY) + VERTICAL_SPACING;
         dc.drawText(x, y, Gfx.FONT_NUMBER_MILD, score, justify);
         dc.setColor(Gfx.COLOR_WHITE, Gfx.COLOR_BLACK);
     }
