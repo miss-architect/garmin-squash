@@ -10,18 +10,10 @@ class SquashApp extends App.AppBase {
     //! be displayed on screen
     hidden var dataTracker;
 
-    //! Points to win a set
-    hidden var setMaxScore = 99;
-
-    //! Sets to win a match
-    hidden var setTotalSets = 98;
-
     //! Constructor
     function initialize() {
         AppBase.initialize();
-        setMaxScore = readKeyInt("setMaxScore", 11);
-        setTotalSets = readKeyInt("setTotalSets", 5);
-        dataTracker = new DataTracker(setMaxScore, setTotalSets);
+        dataTracker = new DataTracker();
     }
 
     //! onStart() is called on application start up
@@ -47,19 +39,4 @@ class SquashApp extends App.AppBase {
         return [new SquashView(dataTracker), new SquashDelegate(dataTracker) ];
     }
 
-    // make sure property is of type number
-    // see https://webcache.googleusercontent.com/search?cd=2&hl=en&ct=clnk&gl=ch&
-    //     q=cache:0hxHRJ_80hcJ:https://forums.garmin.com/archive/index.php/t-359183.html+
-    function readKeyInt(key, thisDefault) {
-        var value = Application.getApp().getProperty(key);
-
-        if(value == null || !(value instanceof Number)) {
-            if(value != null) {
-                value = value.toNumber();
-            } else {
-                value = thisDefault;
-            }
-        }
-        return value;
-    }
 }
