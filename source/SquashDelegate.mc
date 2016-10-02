@@ -10,7 +10,7 @@ class SquashDelegate extends Ui.BehaviorDelegate {
     hidden var dataTracker;
 
     //! Constructor
-    //! @param dataTracker Shared objtect that contains 
+    //! @param dataTracker Shared objtect that contains
     //!       the data that will be displayed on screen
     function initialize(dataTracker) {
         BehaviorDelegate.initialize();
@@ -69,52 +69,52 @@ class SquashDelegate extends Ui.BehaviorDelegate {
                             new Ui.BehaviorDelegate(), Ui.SLIDE_IMMEDIATE);
             }
             else {
-                Ui.pushView(new WinGameView({:player=>Ui.loadResource(Rez.Strings.player2_score_label), 
+                Ui.pushView(new WinGameView({:player=>Ui.loadResource(Rez.Strings.player2_score_label),
                                 :dataTracker=>dataTracker}),
                             new WinGameDelegate(dataTracker), Ui.SLIDE_IMMEDIATE);
             }
         }
     }
-    
+
     //! Function called when user taps a touch screen.
     //! Replacement of Button feature that does not exist
     //! in sdk v1.3.1
     function onTap(evt)
     {
-    	var x = evt.getCoordinates()[0];
-    	var y = evt.getCoordinates()[1];
+        var x = evt.getCoordinates()[0];
+        var y = evt.getCoordinates()[1];
         if (isHitting(x,y, player1LocX)) {
-        	onPlayer1();
+            onPlayer1();
         }
         else if (isHitting(x,y, player2LocX)) {
-        	onPlayer2();
+            onPlayer2();
         }
         return true;
     }
-    
+
     //! Check if the user is tapping a score button.
     //! This function uses global variables defined
     //! in SquashView. This is ugly, and has to be
     //! improved! But if Garmin starts offering the
     //! button feature in older devices, this won't be necessary.
     function isHitting(x, y, xStartPosition) {
-    	return (((x > xStartPosition) && (x < (xStartPosition + widthButton))) && 
-    			(y < heightButton));
+        return (((x > xStartPosition) && (x < (xStartPosition + widthButton))) &&
+                (y < heightButton));
     }
-    
+
     //! Event used in non-touchscreen devices to
     //! increment player 2 score
     function onNextPage() {
-    	if (!System.getDeviceSettings().isTouchScreen) {
-    		onPlayer2();
-    	}
+        if (!System.getDeviceSettings().isTouchScreen) {
+            onPlayer2();
+        }
     }
-    
+
     //! Event used in non-soutchscreen devices to
     //! increment player 1 score
     function onPreviousPage() {
-       	if (!System.getDeviceSettings().isTouchScreen) {
-    		onPlayer1();
-    	}   
+           if (!System.getDeviceSettings().isTouchScreen) {
+            onPlayer1();
+        }
     }
 }
