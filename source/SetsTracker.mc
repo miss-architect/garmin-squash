@@ -2,13 +2,13 @@
 //! sets of the game
 class SetsTracker {
     //! Total number of points for one set
-    hidden var MAX_SCORE = 79;
+    hidden var maxScore = 79;
     //! Representation of Player 1
     const PLAYER_1 = 0;
     //! Representation of Player 2
     const PLAYER_2 = 1;
     //! Maximum amount of sets for a game
-    var TOTAL_SETS = 78;
+    var totalSets = 78;
     //! Score of all sets of a game
     hidden var sets;
     //! Total game score (number of sets each player won)
@@ -17,10 +17,10 @@ class SetsTracker {
     hidden var currentSet;
 
     function initialize(setMaxScore, setTotalSets) {
-        MAX_SCORE = setMaxScore;
-        TOTAL_SETS = setTotalSets;
+        maxScore = setMaxScore;
+        totalSets = setTotalSets;
         currentSet = 0;
-        sets = new [TOTAL_SETS];
+        sets = new [totalSets];
         sets[currentSet] = [0, 0];
         gameScore = [0, 0];
     }
@@ -59,7 +59,7 @@ class SetsTracker {
     //! Returns true is the given player won the current set
     //! @param player  PLAYER_1 or PLAYER_2
     function didPlayerWin(player) {
-        return ((sets[currentSet][player] >= MAX_SCORE) &&
+        return ((sets[currentSet][player] >= maxScore) &&
                 (sets[currentSet][player] - sets[currentSet][1 - player] > 1));
     }
 
@@ -90,7 +90,7 @@ class SetsTracker {
 
     //! Returns true if it's the current set is the last one
     hidden function isTheLastSet() {
-        return (currentSet == (TOTAL_SETS - 1));
+        return (currentSet == (totalSets - 1));
     }
 
     //! Returns true if the player losing the match cannot
@@ -99,7 +99,7 @@ class SetsTracker {
         var setDifference = (gameScore[PLAYER_1] - gameScore[PLAYER_2]).abs();
         // Someone is winning and the remaining sets cannot make the loser win
         return  ((setDifference > 0) &&
-                ((TOTAL_SETS - 1) - currentSet) < setDifference);
+                ((totalSets - 1) - currentSet) < setDifference);
     }
 
     //! Returns true if the game is over
