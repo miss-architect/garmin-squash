@@ -46,12 +46,12 @@ class SquashDelegate extends Ui.BehaviorDelegate {
             dataTracker.incrementPlayer1Score()) {
             if (!dataTracker.isGameOver()) {
                 dataTracker.getSession().addLap();
-                Ui.pushView(new WinSetView({:player=>Ui.loadResource(Rez.Strings.player1_score_label),
+                Ui.pushView(new WinSetView({:player=>GameConfiguration.getInstance().getPlayer1Name(),
                                             :gameScore=>dataTracker.getGameScore()}),
                             new Ui.BehaviorDelegate(), Ui.SLIDE_IMMEDIATE);
             }
             else {
-                Ui.pushView(new WinGameView({:player=>Ui.loadResource(Rez.Strings.player1_score_label),
+                Ui.pushView(new WinGameView({:player=>GameConfiguration.getInstance().getPlayer1Name(),
                                 :dataTracker=>dataTracker}),
                             new WinGameDelegate(dataTracker), Ui.SLIDE_IMMEDIATE);
             }
@@ -64,12 +64,12 @@ class SquashDelegate extends Ui.BehaviorDelegate {
             dataTracker.incrementPlayer2Score()) {
             if (!dataTracker.isGameOver()) {
                 dataTracker.getSession().addLap();
-                Ui.pushView(new WinSetView({:player=>Ui.loadResource(Rez.Strings.player2_score_label),
+                Ui.pushView(new WinSetView({:player=>GameConfiguration.getInstance().getPlayer2Name(),
                                 :gameScore=>dataTracker.getGameScore()}),
                             new Ui.BehaviorDelegate(), Ui.SLIDE_IMMEDIATE);
             }
             else {
-                Ui.pushView(new WinGameView({:player=>Ui.loadResource(Rez.Strings.player2_score_label), 
+                Ui.pushView(new WinGameView({:player=>GameConfiguration.getInstance().getPlayer2Name(), 
                                 :dataTracker=>dataTracker}),
                             new WinGameDelegate(dataTracker), Ui.SLIDE_IMMEDIATE);
             }
