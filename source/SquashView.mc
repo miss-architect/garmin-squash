@@ -84,9 +84,10 @@ class SquashView extends Ui.View {
         var x = dc.getWidth() / 2 - HORIZONTAL_SPACING;
         var y = initialY;
 
-        drawPlayerButton(dc, x, y, Ui.loadResource(Rez.Strings.player1_score_label), dataTracker.getPlayer1Score());
+        var gameConfiguration = GameConfiguration.getInstance();
+        drawPlayerButton(dc, x, y, gameConfiguration.getPlayer1Name(), dataTracker.getPlayer1Score(), Gfx.TEXT_JUSTIFY_RIGHT);
         x = dc.getWidth() / 2 + HORIZONTAL_SPACING;
-        drawPlayerButton(dc, x, y, Ui.loadResource(Rez.Strings.player2_score_label), dataTracker.getPlayer2Score());
+        drawPlayerButton(dc, x, y, gameConfiguration.getPlayer2Name(), dataTracker.getPlayer2Score(), Gfx.TEXT_JUSTIFY_LEFT);
         x = dc.getWidth() / 2 - HORIZONTAL_SPACING;
         // Size of label field
         y = y + dc.getFontHeight(Gfx.FONT_TINY) + VERTICAL_SPACING;
@@ -132,16 +133,11 @@ class SquashView extends Ui.View {
 
     //! Draws nicely Player 1 or 2 buttons, considering if they are
     //! highlithed or not.
-    //! @param dc     Where to draw it
-    //! @param label  Label that indicates which player it is
-    //! @param score  Score to draw in the button
-    hidden function drawPlayerButton(dc, x, y, label, score){
-    	var justify = Gfx.TEXT_JUSTIFY_RIGHT;
-    	var button = 0;
-    	if (label.equals(Ui.loadResource(Rez.Strings.player2_score_label))) {
-    		justify = Gfx.TEXT_JUSTIFY_LEFT;
-    		button = 1;
-    	}
+    //! @param dc       Where to draw it
+    //! @param label    Label that indicates which player it is
+    //! @param score    Score to draw in the button
+    //! @param justify  Text justification (e.g. left, right)
+    hidden function drawPlayerButton(dc, x, y, label, score, justify){
     	dc.drawText(x, y, Gfx.FONT_TINY, label, justify);
     	y = y + dc.getFontHeight(Gfx.FONT_TINY) + VERTICAL_SPACING;
         dc.drawText(x, y, Gfx.FONT_NUMBER_MILD, score, justify);

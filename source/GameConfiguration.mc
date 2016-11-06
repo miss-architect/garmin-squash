@@ -1,3 +1,4 @@
+using Toybox.WatchUi as Ui;
 using Toybox.Application as App;
 
 //! Class that holds the configuration of the game
@@ -8,10 +9,22 @@ class GameConfiguration {
 
     hidden var setMaxScore;
     hidden var setTotalSets;
+    hidden var player1Name;
+    hidden var player2Name;
+    static var instance = null;
+    
+    static function getInstance() {
+        if (instance == null) {
+            instance = new GameConfiguration();
+        }
+        return instance;
+    }
 
     function initialize() {
         setMaxScore = readKeyInt("setMaxScore", 11);
         setTotalSets = readKeyInt("setTotalSets", 5);
+        player1Name = readString("player1Name", 8, Ui.loadResource(Rez.Strings.player1_score_label));
+        player2Name = readString("player2Name", 8, Ui.loadResource(Rez.Strings.player2_score_label));
     }
 
     // make sure property is of type number
@@ -30,11 +43,28 @@ class GameConfiguration {
         return value;
     }
     
+    hidden function readString(key, length, thisDefault) {
+        var value = App.getApp().getProperty(key);
+        
+        if(value == null) {
+            value = thisDefault;
+        }
+        return value.substring(0, length);
+    }
+    
     function getMaxScore() {
         return setMaxScore;
     }
     
     function getTotalSets() {
         return setTotalSets;
+    }
+    
+    function getPlayer1Name(){
+        return player1Name;
+    }
+    
+    function getPlayer2Name() {
+        return player2Name;
     }
 }

@@ -3,6 +3,8 @@
         <property id="appVersion" type="string">1.2.0</property>
         <property id="setMaxScore" type="number">11</property>
         <property id="setTotalSets" type="number">5</property>
+        <property id="player1Name" type="string">Player 1</property>
+        <property id="player2Name" type="string">Player 2</property>
     </properties>
 
     <settings>
@@ -12,6 +14,14 @@
 
         <setting propertyKey="@Properties.setTotalSets" title="@Strings.setTotalSetsTitle" prompt="@Strings.setTotalSetsPrompt">
             <settingConfig type="numeric" errorMessage="@Strings.setTotalSetsError" />
+        </setting>
+        
+        <setting propertyKey="@Properties.player1Name" title="@Strings.player1NameTitle" prompt="@Strings.player1NamePrompt">
+            <settingConfig type="alphaNumeric" maxLength="8" errorMessage="@Strings.player1NameError" />
+        </setting>
+        
+        <setting propertyKey="@Properties.player2Name" title="@Strings.player2NameTitle" prompt="@Strings.player2NamePrompt">
+            <settingConfig type="alphaNumeric" maxLength="8" errorMessage="@Strings.player2NameError" />
         </setting>
     </settings>
 
@@ -23,6 +33,14 @@
         <string id="setTotalSetsTitle">Match length</string>
         <string id="setTotalSetsPrompt">No of sets to win match</string>
         <string id="setTotalSetsError">Error?!?</string>
+        
+        <string id="player1NameTitle">Player 1 name</string>
+        <string id="player1NamePrompt">Name of player 1 (max 8 chars)</string>
+        <string id="player1NameError">Error?!?</string>
+        
+        <string id="player2NameTitle">Player 2 name</string>
+        <string id="player2NamePrompt">Name of player 2 (max 8 chars)</string>
+        <string id="player2NameError">Error?!?</string>
 
         <string id="player1_score_label">Player 1</string>
         <string id="player2_score_label">Player 2</string>

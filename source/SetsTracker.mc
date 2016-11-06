@@ -15,7 +15,7 @@ class SetsTracker {
     hidden var gameConfiguration;
 
     function initialize() {
-        gameConfiguration = new GameConfiguration();
+        gameConfiguration = GameConfiguration.getInstance();
         currentSet = 0;
         sets = new [gameConfiguration.getTotalSets()];
         sets[currentSet] = [0, 0];
