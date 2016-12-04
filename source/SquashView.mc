@@ -13,7 +13,7 @@ using Toybox.System as System;
 var player1LocX = 0;
 var player2LocX = 0;
 var heightButton = 0;
-var widthButton = 0; 
+var widthButton = 0;
 
 
 //! Class that represents the main Squash App
@@ -40,7 +40,7 @@ class SquashView extends Ui.View {
     hidden var initialY;
 
     //! Constructor
-    //! @param dataTracker Shared objtect that contains 
+    //! @param dataTracker Shared objtect that contains
     //! the data that will be displayed on screen
     function initialize(dataTracker) {
         View.initialize();
@@ -57,11 +57,11 @@ class SquashView extends Ui.View {
         if (System.getDeviceSettings().screenShape == System.SCREEN_SHAPE_ROUND) {
             initialY += 10;
         }
-        
-   	    heightButton = dc.getFontHeight(Gfx.FONT_TINY) + dc.getFontHeight(Gfx.FONT_NUMBER_MILD) + VERTICAL_SPACING;
-   	    widthButton = (dc.getWidth() / 2) - HORIZONTAL_SPACING;
-   	    player1LocX = 0;
-   	    player2LocX = (dc.getWidth() / 2) + HORIZONTAL_SPACING;
+
+        heightButton = dc.getFontHeight(Gfx.FONT_TINY) + dc.getFontHeight(Gfx.FONT_NUMBER_MILD) + VERTICAL_SPACING;
+        widthButton = (dc.getWidth() / 2) - HORIZONTAL_SPACING;
+        player1LocX = 0;
+        player2LocX = (dc.getWidth() / 2) + HORIZONTAL_SPACING;
     }
 
     //! Called when this View is brought to the foreground. Restore
@@ -85,8 +85,16 @@ class SquashView extends Ui.View {
         var y = initialY;
 
         var gameConfiguration = GameConfiguration.getInstance();
+        if (dataTracker.getServingPlayer() == Player.PLAYER_1) {
+            dc.setColor(Gfx.COLOR_RED, Gfx.COLOR_BLACK);
+        }
         drawPlayerButton(dc, x, y, gameConfiguration.getPlayer1Name(), dataTracker.getPlayer1Score(), Gfx.TEXT_JUSTIFY_RIGHT);
         x = dc.getWidth() / 2 + HORIZONTAL_SPACING;
+
+        if (dataTracker.getServingPlayer() == Player.PLAYER_2) {
+            dc.setColor(Gfx.COLOR_RED, Gfx.COLOR_BLACK);
+        }
+
         drawPlayerButton(dc, x, y, gameConfiguration.getPlayer2Name(), dataTracker.getPlayer2Score(), Gfx.TEXT_JUSTIFY_LEFT);
         x = dc.getWidth() / 2 - HORIZONTAL_SPACING;
         // Size of label field
@@ -138,9 +146,9 @@ class SquashView extends Ui.View {
     //! @param score    Score to draw in the button
     //! @param justify  Text justification (e.g. left, right)
     hidden function drawPlayerButton(dc, x, y, label, score, justify){
-    	dc.drawText(x, y, Gfx.FONT_TINY, label, justify);
-    	y = y + dc.getFontHeight(Gfx.FONT_TINY) + VERTICAL_SPACING;
-        dc.drawText(x, y, Gfx.FONT_NUMBER_MILD, score, justify);
+      	dc.drawText(x, y, Gfx.FONT_TINY, label, justify);
+      	y = y + dc.getFontHeight(Gfx.FONT_TINY) + VERTICAL_SPACING;
+      	dc.drawText(x, y, Gfx.FONT_NUMBER_MILD, score, justify);
         dc.setColor(Gfx.COLOR_WHITE, Gfx.COLOR_BLACK);
     }
 

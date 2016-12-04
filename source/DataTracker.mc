@@ -15,6 +15,8 @@ class DataTracker {
     hidden var session;
     //! Sets tracker
     hidden var setsTracker;
+    //! Contains who is serving
+    hidden var servingPlayer;
 
     //! Constructor
     function initialize() {
@@ -36,6 +38,7 @@ class DataTracker {
             session.stop();
         }
         setsTracker = new SetsTracker();
+        servingPlayer = Player.NO_PLAYER;
     }
 
     //! Updates the calculated values taken from
@@ -44,7 +47,6 @@ class DataTracker {
         var activityInfo = Act.getInfo();
         numberOfSteps = activityInfo.steps - initialSteps;
         numberOfCalories = activityInfo.calories - initialCalories;
-        
     }
 
     //! Returns the number of steps done during the current activity
@@ -108,6 +110,17 @@ class DataTracker {
     //! Returns the session that records the activity
     function getSession() {
         return session;
+    }
+
+    //! Sets the plater that is currently serving
+    //! @param newServingPlayer Should be Player.PLAYER_1, Player.PLAYER_2 or Player.NO_PLAYER
+    function changeServingPlayer(newServingPlayer){
+        servingPlayer = newServingPlayer;
+    }
+
+    //! Returns the current serving player (Player.PLAYER_1, Player.PLAYER_2 or Player.NO_PLAYER)
+    function getServingPlayer() {
+        return servingPlayer;
     }
 
 }
