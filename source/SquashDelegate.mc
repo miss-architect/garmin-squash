@@ -10,7 +10,7 @@ class SquashDelegate extends Ui.BehaviorDelegate {
     hidden var dataTracker;
 
     //! Constructor
-    //! @param dataTracker Shared objtect that contains 
+    //! @param dataTracker Shared objtect that contains
     //!       the data that will be displayed on screen
     function initialize(dataTracker) {
         BehaviorDelegate.initialize();
@@ -55,6 +55,10 @@ class SquashDelegate extends Ui.BehaviorDelegate {
                                 :dataTracker=>dataTracker}),
                             new WinGameDelegate(dataTracker), Ui.SLIDE_IMMEDIATE);
             }
+            dataTracker.changeServingPlayer(Player.NO_PLAYER);
+        }
+        else {
+            dataTracker.changeServingPlayer(Player.PLAYER_1);
         }
     }
 
@@ -69,52 +73,81 @@ class SquashDelegate extends Ui.BehaviorDelegate {
                             new Ui.BehaviorDelegate(), Ui.SLIDE_IMMEDIATE);
             }
             else {
-                Ui.pushView(new WinGameView({:player=>GameConfiguration.getInstance().getPlayer2Name(), 
+                Ui.pushView(new WinGameView({:player=>GameConfiguration.getInstance().getPlayer2Name(),
                                 :dataTracker=>dataTracker}),
                             new WinGameDelegate(dataTracker), Ui.SLIDE_IMMEDIATE);
             }
+            dataTracker.changeServingPlayer(Player.NO_PLAYER);
+        }
+        else {
+            dataTracker.changeServingPlayer(Player.PLAYER_2);
         }
     }
-    
+
     //! Function called when user taps a touch screen.
     //! Replacement of Button feature that does not exist
     //! in sdk v1.3.1
     function onTap(evt)
     {
-    	var x = evt.getCoordinates()[0];
-    	var y = evt.getCoordinates()[1];
+      var x = evt.getCoordinates()[0];
+      var y = evt.getCoordinates()[1];
         if (isHitting(x,y, player1LocX)) {
-        	onPlayer1();
+          onPlayer1();
         }
         else if (isHitting(x,y, player2LocX)) {
-        	onPlayer2();
+          onPlayer2();
         }
         return true;
     }
-    
+
     //! Check if the user is tapping a score button.
     //! This function uses global variables defined
     //! in SquashView. This is ugly, and has to be
     //! improved! But if Garmin starts offering the
     //! button feature in older devices, this won't be necessary.
     function isHitting(x, y, xStartPosition) {
-    	return (((x > xStartPosition) && (x < (xStartPosition + widthButton))) && 
-    			(y < heightButton));
+      return (((x > xStartPosition) && (x < (xStartPosition + widthButton))) &&
+          (y < heightButton));
     }
-    
+
     //! Event used in non-touchscreen devices to
     //! increment player 2 score
     function onNextPage() {
-    	if (!System.getDeviceSettings().isTouchScreen) {
-    		onPlayer2();
-    	}
+      if (!System.getDeviceSettings().isTouchScreen) {
+        onPlayer2();
+      }
     }
-    
+
     //! Event used in non-soutchscreen devices to
     //! increment player 1 score
     function onPreviousPage() {
-       	if (!System.getDeviceSettings().isTouchScreen) {
-    		onPlayer1();
-    	}   
+      if (!System.getDeviceSettings().isTouchScreen) {
+        onPlayer1();
+      }
+    }
+
+    //! Event used when back button is pressed.
+    //! It shows a confirmation dialig before quitting the App
+    function onBack() {
+        Ui.pushView(new Confirmation(Ui.loadResource(Rez.Strings.confirm_exit)),
+            new ExitConfirmationDelegate(), Ui.SLIDE_IMMEDIATE);
+        return true;
+    }
+}
+
+//! Delegate that handles the event from the Confirmation dialog
+//! that appears before quitting the App.
+class ExitConfirmationDelegate extends Ui.ConfirmationDelegate {
+
+    function initialize() {
+        ConfirmationDelegate.initialize();
+    }
+
+    //! Event that happens on response of the user.
+    //! When the user replies YES, then the App exits.
+    function onResponse(response) {
+        if (response == CONFIRM_YES) {
+            System.exit();
+        }
     }
 }
