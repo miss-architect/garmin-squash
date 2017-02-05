@@ -125,4 +125,29 @@ class SquashDelegate extends Ui.BehaviorDelegate {
         onPlayer1();
       }
     }
+
+    //! Event used when back button is pressed.
+    //! It shows a confirmation dialig before quitting the App
+    function onBack() {
+        Ui.pushView(new Confirmation(Ui.loadResource(Rez.Strings.confirm_exit)),
+            new ExitConfirmationDelegate(), Ui.SLIDE_IMMEDIATE);
+        return true;
+    }
+}
+
+//! Delegate that handles the event from the Confirmation dialog
+//! that appears before quitting the App.
+class ExitConfirmationDelegate extends Ui.ConfirmationDelegate {
+
+    function initialize() {
+        ConfirmationDelegate.initialize();
+    }
+
+    //! Event that happens on response of the user.
+    //! When the user replies YES, then the App exits.
+    function onResponse(response) {
+        if (response == CONFIRM_YES) {
+            System.exit();
+        }
+    }
 }

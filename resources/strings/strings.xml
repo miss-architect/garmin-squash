@@ -5,4 +5,6 @@
 
     <string id="menu_label_1">Item 1</string>
     <string id="menu_label_2">Item 2</string>
+    
+    <string id="confirm_exit">Quit Squash App?</string>
 </strings>
