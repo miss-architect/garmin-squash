@@ -1,5 +1,6 @@
 using Toybox.ActivityRecording as Record;
 using Toybox.FitContributor as Fit;
+using Toybox.Attention as Attention;
 
 //! Class used to record an activity
 class Session {
@@ -29,7 +30,7 @@ class Session {
     function start(){
         if(Toybox has :ActivityRecording ) {
             if(!isRecording()) {
-                   session = Record.createSession({:name=>"Squash", 
+                   session = Record.createSession({:name=>"Squash",
                                                    :sport=>Record.SPORT_TENNIS,
                                                    :subSport=>Record.SUB_SPORT_MATCH});
                 setupFields();
