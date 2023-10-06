@@ -32,7 +32,7 @@ class Session {
             if(!isRecording()) {
                    session = Record.createSession({:name=>"Squash",
                                                    :sport=>Record.SPORT_TENNIS,
-                                                   :subSport=>Record.SUB_SPORT_MATCH});
+                                                   :subSport=>Record.SUB_SPORT_SQUASH});
                 setupFields();
                 session.start();
                 sessionStarted = Time.now();
